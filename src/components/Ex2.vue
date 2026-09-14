@@ -8,11 +8,16 @@ const scoreB = ref(0)
 const step = ref(1) // points added per click
 const maxScore = ref(10)
 const winner = ref("");
+const total = ref(0)
+function computeTotal(){
+  total.value = scoreA.value + scoreB.value;
+}
 function addA() {
   scoreA.value = Math.min(maxScore.value, scoreA.value + step.value)
   if(scoreA.value==maxScore.value){
     winner.value = teamA.value;
   }
+  computeTotal();
 }
 
 function addB() {
@@ -20,12 +25,14 @@ function addB() {
     if(scoreB.value==maxScore.value){
     winner.value = teamB.value;
   }
+  computeTotal();
 }
 
 function reset() {
   scoreA.value = 0
   scoreB.value = 0
   winner.value = "";
+  computeTotal();
 }
 </script>
 
@@ -38,7 +45,11 @@ function reset() {
     </p>
 
     <p>Current: {{ scoreA }} - {{ scoreB }}</p>
-
+<p>Total points: {{ total }}</p>
+<p>Points left to win: 
+            <!-- {{ maxScore - (scoreA > scoreB ? scoreA : scoreB) }} -->
+            {{ maxScore - Math.max(scoreA, scoreB) }}
+        </p>
     <!-- B. In-template expressions go here -->
 
     <!-- A. Event handlers go here -->
