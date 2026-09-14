@@ -8,7 +8,7 @@ function deleteItem(index) {
   items.value.splice(index, 1)
 }
 
-function addItem() {
+function addItem(event) {
   items.value.push(newItem.value)
   newItem.value = ''
 }
@@ -24,8 +24,6 @@ function addItem() {
     </li>
   </ul>
 
-  <form @submit.prevent="addItem">
     <input v-model="newItem">
-    <button type="submit">Add!</button>
-  </form>
+    <button @click="addItem" type="submit" @keydown="addItem">Add!</button>
 </template>
