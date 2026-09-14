@@ -7,32 +7,21 @@ const scoreA = ref(0)
 const scoreB = ref(0)
 const step = ref(1) // points added per click
 const maxScore = ref(10)
-const winner = ref("");
-const total = ref(0)
-function computeTotal(){
-  total.value = scoreA.value + scoreB.value;
-}
+
 function addA() {
+  // add points to Team A, maximum is 10
   scoreA.value = Math.min(maxScore.value, scoreA.value + step.value)
-  if(scoreA.value==maxScore.value){
-    winner.value = teamA.value;
-  }
-  computeTotal();
 }
 
 function addB() {
-  scoreB.value = Math.min(maxScore.value, scoreB.value + step.value);
-    if(scoreB.value==maxScore.value){
-    winner.value = teamB.value;
-  }
-  computeTotal();
+  // add points to Team B, maximum is 10
+  scoreB.value = Math.min(maxScore.value, scoreB.value + step.value)
 }
 
 function reset() {
+  // reset both scores
   scoreA.value = 0
   scoreB.value = 0
-  winner.value = "";
-  computeTotal();
 }
 </script>
 
@@ -45,12 +34,10 @@ function reset() {
     </p>
 
     <p>Current: {{ scoreA }} - {{ scoreB }}</p>
-<p>Total points: {{ total }}</p>
-<p>Points left to win: 
-            <!-- {{ maxScore - (scoreA > scoreB ? scoreA : scoreB) }} -->
-            {{ maxScore - Math.max(scoreA, scoreB) }}
-        </p>
+
     <!-- B. In-template expressions go here -->
+    <p>Total points: {{ scoreA + scoreB }}</p>
+    <p>Points left to win: {{ maxScore - Math.max(scoreA, scoreB) }}</p>
 
     <!-- A. Event handlers go here -->
     <div style="display: flex; gap: 12px; margin: 12px 0">
@@ -58,15 +45,20 @@ function reset() {
       <button @click="addB">+ Team B</button>
       <button @click="reset">Reset</button>
     </div>
-    <div v-if="winner==''">
-      No winner yet. Keep playing!
-    </div>
-    <div v-else>
-      Winner: {{ winner }}
-    </div>
 
     <div style="margin-top: 14px">
       <!-- C. Display winner / status here -->
+      <div v-if="scoreA === maxScore">
+        Winner: {{ teamA.toUpperCase() }}
+      </div>
+
+      <div v-else-if="scoreB === maxScore">
+        Winner: {{ teamB.toUpperCase() }}
+      </div>
+
+      <div v-else>
+        No winner yet. Keep playing!
+      </div>
     </div>
   </div>
 </template>
