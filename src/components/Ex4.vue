@@ -24,6 +24,6 @@ function addItem(event) {
     </li>
   </ul>
 
-    <input v-model="newItem">
-    <button @click="addItem" type="submit" @keyup.enter="addItem">Add!</button>
+    <input v-model="newItem" @keyup.enter="addItem">
+    <button @click="addItem" type="submit" >Add!</button>
 </template>
