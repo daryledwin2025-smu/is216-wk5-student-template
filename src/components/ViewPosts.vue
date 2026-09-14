@@ -16,24 +16,25 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div id="demo">    
-        <h2> Blog Posts </h2> 
-        <table class="table m-2">
-            <thead>
-                <tr><th>Subject</th><th>Entry</th><th>Mood</th></tr>
-            </thead>
-            <tbody>
-                <tr v-for="post in posts">
-                <td>{{post.subject}}</td>
-                <td>{{post.entry}}</td>
-                <td>{{post.mood}}</td>
-            </tr>
-            </tbody>
-           
-        </table>
-    </div>
+  <div id="demo">
+    <h2>Blog Posts</h2>
+    <table class="table m-2">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Entry</th>
+          <th>Mood</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="post in posts">
+          <td>{{ post.subject }}</td>
+          <td>{{ post.entry }}</td>
+          <td>{{ post.mood }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

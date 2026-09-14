@@ -3,34 +3,55 @@ import { ref, computed } from 'vue'
 
 const x = ref(0)
 const y = ref(0)
-const operators = ref(["+", "-", "*", "/", "%"])
-const selectedOp = ref("+")
+const operators = ref(['+', '-', '*', '/', '%'])
+const selectedOp = ref('+')
+const result = computed(() => {
 
-// TODO: Add Code Here
+  if (selectedOp.value === '+') {
+
+    return x.value + y.value
+
+  } else if (selectedOp.value === '-') {
+
+    return x.value - y.value
+
+  } else if (selectedOp.value === '*') {
+
+    return x.value * y.value
+
+  } else if (selectedOp.value === '/') {
+
+    return x.value / y.value
+
+  } else if (selectedOp.value === '%') {
+
+    return x.value % y.value
+
+  }
+
+})// TODO: Add Code Here
 // Note: DO NOT USE "eval()". In security, "eval" is considered "evil"!!!
-
-    
 </script>
 
 <template>
-    <p>x <input v-model.number="x"></p>
-    <select v-model="selectedOp">
-        <option v-for="op in operators">{{ op }}</option>
-    </select>
-    <p>y <input v-model.number="y"></p>
+  <p>x <input v-model.number="x" /></p>
+  <select v-model="selectedOp">
+    <option v-for="op in operators">{{ op }}</option>
+  </select>
+  <p>y <input v-model.number="y" /></p>
 
-    <p>---------------------</p>
+  <p>---------------------</p>
 
-    <p>= {{ result }}</p>
+  <p>= {{ result }}</p>
 </template>
 
 <style scoped>
 p,
 input {
-    font-family: monospace;
+  font-family: monospace;
 }
 
 p {
-    white-space: pre;
+  white-space: pre;
 }
 </style>
